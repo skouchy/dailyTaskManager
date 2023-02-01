@@ -34,7 +34,7 @@ setInterval(function () {
   time = clock();
   let formatHour = formatHoursTo12();
   currentTime = (formatHour + ':' + time.minutes);
-  let ampm = (formatHour <= 12) ? [currentTime + "am"] : [currentTime+"pm"]; 
+  let ampm = (formatHour <= 12) ? [currentTime + " am"] : [currentTime+" pm"]; 
   $('#currentTime').text(ampm);
   timeBlockColor();
 }, 1000);
