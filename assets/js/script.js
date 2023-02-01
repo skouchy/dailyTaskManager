@@ -1,48 +1,49 @@
-let taskEl = document.querySelector('.time-block');
-let buttonEl = document.querySelector('.saveBtn');
+let taskEl = $('.time-block');
+console.log(taskEl);
+let buttonEl = $('.saveBtn');
+console.log(buttonEl)
 
 let today = dayjs().format('MMM D, YYYY');
 $('#currentDay').text(today);
 let currentTime;
 let time;
 
-// minutes:seconds formatted in 2-digit display
-function addZero(i) {
-  if (i < 10) {
-    i = "0" + i
-  }
-  return i;
-}
-
 // getDate data : hours:minutes:seconds
 function clock() {
   time = new Date();
   return {
     hours: time.getHours(),
-    minutes: addZero(time.getMinutes()),
-    seconds: addZero(time.getSeconds()),
+    minutes: time.getMinutes(),
+    seconds: time.getSeconds(),
   }
 }
 
 // displays time in 12hr format
-function formatHoursTo12() {
-  return time.hours % 12 || 12;
+function formatTimeTo12() {
+  let time = clock();
+  let hour = time.hours;
+  let minutes = time.minutes;
+  let seconds = time.seconds;
+  let ampm = hour >=12 ? ' pm' : ' am';
+  hour = hour % 12;
+  hour = hour ? hour : 12;
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+  let headerClock = hour + ':' + minutes + ':' + seconds + ampm;
+  $('#currentTime').text(headerClock);
+  console.log(headerClock);
+  timeBlockColor();
 }
 
 // begins clock interval onload to display current formatted time
 setInterval(function () {
-  time = clock();
-  let formatHour = formatHoursTo12();
-  currentTime = (formatHour + ':' + time.minutes);
-  let ampm = (formatHour <= 12) ? [currentTime + " am"] : [currentTime+" pm"]; 
-  $('#currentTime').text(ampm);
-  timeBlockColor();
-}, 1000);
+  formatTimeTo12()
+}, 5000);
 
 function timeBlockColor() {
+  time = clock() 
   // if ()
   console.log('currentTime in timeBlock func');
-  console.log(currentTime);
+  // console.log(time);
 }
 
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
@@ -51,6 +52,20 @@ function timeBlockColor() {
 // $(function (event) {
   // TODO: Add a listener for click events on the save button. This code should
   // taskItemEl.addEventListener('submit', value);
+  // $('.saveBtn').on("submit", function({
+  // $(addtoLocalStorage
+  // })
+  // $( "p" ).css( "color", "red" ).find( ".special" ).css( "color", "green" );
+//   function toggleColor(){
+//     tag = $('div');
+//     // Ternary Operator (add/remove background color)
+//     // If tag color is green convert it to red otherwise convert to green.
+//    tag.css('background') == 'green' ? tag.css({'background':'red'}) : tag.css({'background':'green'});
+//  }
+
+//   $('button').on('click', function(){
+//     toggleColor();
+//   });
   // *use the id in the containing time-block as a key to save the user input in
     // *local storage. HINT: What does `this` reference in the click listener
     // *function? How can DOM traversal be used to get the "hour-x" id of the
