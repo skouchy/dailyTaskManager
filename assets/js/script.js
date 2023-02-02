@@ -1,12 +1,15 @@
-let taskEl = $('.time-block');
-console.log(taskEl);
-let buttonEl = $('.saveBtn');
-console.log(buttonEl)
-
 let today = dayjs().format('MMM D, YYYY');
 $('#currentDay').text(today);
+
 let currentTime;
 let time;
+let timeBlockEl;
+
+let buttonEl = $('.saveBtn');
+
+// *$(document).ready(function() {
+//   $('body').wrapAll();
+// })
 
 // getDate data : hours:minutes:seconds
 function clock() {
@@ -24,7 +27,7 @@ function formatTimeTo12() {
   let hour = time.hours;
   let minutes = time.minutes;
   let seconds = time.seconds;
-  let ampm = hour >=12 ? ' pm' : ' am';
+  let ampm = hour >= 12 ? ' pm' : ' am';
   hour = hour % 12;
   hour = hour ? hour : 12;
   minutes = minutes < 10 ? '0' + minutes : minutes;
@@ -34,19 +37,36 @@ function formatTimeTo12() {
   timeBlockColor();
 }
 
+// sets hour-block class "present", "past", "future" : background color based on time comparison
+function timeBlockColor() {
+  $('.time-block').each(function () {
+    timeBlockEl = ($(this).attr('id'));
+    
+    time = clock();
+    
+    let currentHour = time.hours;
+    if (currentHour == timeBlockEl) {
+      console.log('the time is now bitches')
+    } else if (currentHour > timeBlockEl) {
+      $(this).attr('class', '.past')
+      console.log('the time has past bitches')
+    } else {
+      $(this).attr('class', '.future');
+      console.log('the world is your oyster')
+    }
+    console.log('the current hour is ' + currentHour)
+    console.log('this is ' + timeBlockEl)
+  });
+}
+
 // begins clock interval onload to display current formatted time
 setInterval(function () {
   formatTimeTo12()
 }, 5000);
 
-function timeBlockColor() {
-  time = clock() 
-  // if ()
-  console.log('currentTime in timeBlock func');
-  // console.log(time);
-}
 
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
+
+    // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 // $(function (event) {
