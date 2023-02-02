@@ -1,4 +1,4 @@
-# randoPswdGen
+# dailyTaskManager
 Daily Task Manager
 
 ## Description
@@ -10,9 +10,9 @@ A simply designed task manager application that allows a user to input and save 
 * javaScript/jQuery
 
 ## Link to Repo
-https://github.com/skouchy/taskManager
+https://github.com/skouchy/dailyTaskManager
 
 ## Link to Deployed Site
-https://skouchy.github.io/taskManager/
+https://skouchy.github.io/dailyTaskManager/
 
 

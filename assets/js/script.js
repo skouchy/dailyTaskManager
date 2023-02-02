@@ -53,6 +53,7 @@ function timeBlockColor() {
     } else {
       $(this).attr('class', '.future');
       console.log('the world is your oyster')
+      console.log($(this).attr('class'))
     }
     console.log('the current hour is ' + currentHour)
     console.log('this is ' + timeBlockEl)
