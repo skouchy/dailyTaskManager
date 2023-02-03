@@ -1,71 +1,30 @@
 let today = dayjs().format('MMM D, YYYY');
 $('#currentDay').text(today);
-
-let currentTime;
-let time;
-let timeBlockEl;
+let currentHour = dayjs().hour();
 
 let buttonEl = $('.saveBtn');
-
-// *$(document).ready(function() {
-//   $('body').wrapAll();
-// })
-
-// getDate data : hours:minutes:seconds
-function clock() {
-  time = new Date();
-  return {
-    hours: time.getHours(),
-    minutes: time.getMinutes(),
-    seconds: time.getSeconds(),
-  }
-}
-
-// displays time in 12hr format
-function formatTimeTo12() {
-  let time = clock();
-  let hour = time.hours;
-  let minutes = time.minutes;
-  let seconds = time.seconds;
-  let ampm = hour >= 12 ? ' pm' : ' am';
-  hour = hour % 12;
-  hour = hour ? hour : 12;
-  minutes = minutes < 10 ? '0' + minutes : minutes;
-  let headerClock = hour + ':' + minutes + ':' + seconds + ampm;
-  $('#currentTime').text(headerClock);
-  console.log(headerClock);
-  timeBlockColor();
-}
+let timeBlockId = $('div.time-block').attr('id');
+let newClass;
 
 // sets hour-block class "present", "past", "future" : background color based on time comparison
 function timeBlockColor() {
-  $('.time-block').each(function () {
-    timeBlockEl = ($(this).attr('id'));
-    
-    time = clock();
-    
-    let currentHour = time.hours;
-    if (currentHour == timeBlockEl) {
-      console.log('the time is now bitches')
-    } else if (currentHour > timeBlockEl) {
-      $(this).attr('class', '.past')
-      console.log('the time has past bitches')
+  $('div.time-block').each(function () {
+    timeBlockId = $(this).attr('id');
+
+    if (currentHour == timeBlockId) {
+      newClass = $(this).addClass('present')
+    } else if (currentHour > timeBlockId) {
+      newClass = $(this).addClass('past')
     } else {
-      $(this).attr('class', '.future');
-      console.log('the world is your oyster')
-      console.log($(this).attr('class'))
+      newClass = $(this).addClass('present')
     }
-    console.log('the current hour is ' + currentHour)
-    console.log('this is ' + timeBlockEl)
   });
 }
 
-// begins clock interval onload to display current formatted time
-setInterval(function () {
-  formatTimeTo12()
-}, 5000);
+$(window).ready = timeBlockColor();
 
 
+// let textInput = localStorage.getItem
 
     // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
