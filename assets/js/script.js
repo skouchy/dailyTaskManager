@@ -18,9 +18,15 @@ function timeBlockColor() {
       newClass = $(this).addClass('future')
     }
 
-    let textArea = localStorage.getItem(timeBlockId);
-    $('textarea.description').val(textArea);
-    
+    loadTask();
+  })
+}
+
+function loadTask() {
+  $('textarea.description').each(function () {
+    let textArea = $(this);
+    let textAreaId = $(this).attr('id');
+    textArea.val(localStorage.getItem(textAreaId));
   })
 }
 
@@ -28,8 +34,8 @@ function timeBlockColor() {
 function saveTask() {
   $('textarea.description').each(function () {
     let textArea = $(this);
-    localStorage.setItem('taskInput', textArea.val());
-    console.log(localStorage)
+    let textAreaId = $(this).attr('id');
+    localStorage.setItem(textAreaId, textArea.val().toString());
   })
 }
 
